@@ -1,0 +1,18 @@
+/* Typography */
+
+h1 {
+  font-family: "Playfair Display", serif;
+  color: #336E7B;
+}
+
+h2 {
+  font-family: Lato, sans-serif;
+}
+
+/* General */
+
+body {
+  background-color: #D2D7D3;
+  padding-bottom: 2em;
+}
+
