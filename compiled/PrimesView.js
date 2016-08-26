@@ -10,14 +10,48 @@ PrimesView = (function(superClass) {
     return PrimesView.__super__.constructor.apply(this, arguments);
   }
 
-  PrimesView.prototype.initialize = function() {};
+  PrimesView.prototype.initialize = function() {
+    return this.generator = new PrimesGenerator;
+  };
 
   PrimesView.prototype.getTextInput = function() {
-    return '<h6>Enter a Number:</h6><input type="text" name="numInput" class="numInput">';
+    return '<h4>Enter a Number:</h4><input type="text" name="numInput" class="numInput" maxlength="10">';
   };
 
   PrimesView.prototype.getOutputLabel = function() {
-    return '<h6> Primes: <h6 class="primesList"> </h6> </h6>';
+    return '<h4> Primes: <h5 class="primesList"> </h5> </h4>';
+  };
+
+  PrimesView.prototype.getPrimesList = function(num) {
+    return this.generator.generatePrimes(num);
+  };
+
+  PrimesView.prototype.getFormattedPrimesList = function(primes) {
+    var formattedPrimes, unformattedPrimes;
+    unformattedPrimes = JSON.stringify(primes);
+    formattedPrimes = "";
+    _.each(unformattedPrimes, (function(_this) {
+      return function(unformattedCharacter) {
+        if (unformattedCharacter === '[' || unformattedCharacter === ']') {
+
+        } else if (unformattedCharacter === ',') {
+          return formattedPrimes += ", ";
+        } else {
+          return formattedPrimes += unformattedCharacter;
+        }
+      };
+    })(this));
+    return formattedPrimes;
+  };
+
+  PrimesView.prototype.updateOutputLabel = function(input) {
+    var primes;
+    primes = this.getPrimesList(input.target.value);
+    return $(".primesList").html(this.getFormattedPrimesList(primes));
+  };
+
+  PrimesView.prototype.events = {
+    "keyup .numInput": "updateOutputLabel"
   };
 
   PrimesView.prototype.render = function() {

@@ -9,11 +9,21 @@ describe("PrimesView", function() {
     expect(view.getTextInput()).toContain('input type="text"');
     return expect(view.getTextInput()).toHaveClass('numInput');
   });
+  it("can get a text input box with a maximum length", function() {
+    expect(view.getTextInput()).toContain('maxlength');
+    return expect(view.getTextInput()).toHaveClass('numInput');
+  });
   it("can get an output label", function() {
     return expect(view.getOutputLabel()).toHaveClass('primesList');
   });
-  return it("can get the html with the input and label", function() {
+  it("can get the html with the input and label", function() {
     expect(view.render().$el.html()).toContain('numInput');
     return expect(view.render().$el.html()).toContain('primesList');
+  });
+  it("can get a list of primes for a number", function() {
+    return expect(view.getPrimesList(4)).toEqual([2, 2]);
+  });
+  return it("can format a list", function() {
+    return expect(view.getFormattedPrimesList([2, 2])).toEqual("2, 2");
   });
 });
