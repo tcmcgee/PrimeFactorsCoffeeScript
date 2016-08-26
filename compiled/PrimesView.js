@@ -12,8 +12,16 @@ PrimesView = (function(superClass) {
 
   PrimesView.prototype.initialize = function() {};
 
+  PrimesView.prototype.getTextInput = function() {
+    return '<h6>Enter a Number:</h6><input type="text" name="numInput" class="numInput">';
+  };
+
+  PrimesView.prototype.getOutputLabel = function() {
+    return '<h6> Primes: <h6 class="primesList"> </h6> </h6>';
+  };
+
   PrimesView.prototype.render = function() {
-    this.$el.html('<h6>rendered</h6>');
+    this.$el.html(this.getTextInput() + this.getOutputLabel());
     return this;
   };
 
